@@ -26,6 +26,12 @@
       misc styles, nothing to do with CSS variables
     */
 
+    :root {
+      --spacing: 10px;
+      --blur: 10px;
+      --base: #ffc600;
+    }
+
     body {
       text-align: center;
       background: #193549;
@@ -42,9 +48,34 @@
     input {
       width:100px;
     }
+
+    img {
+      padding: var(--spacing);
+      background-color: var(--base);
+      filter: blur(var(--blur));
+    }
+
+    .h1 {
+      
+    }
   </style>
 
   <script>
+    // 取得所有的input
+    const inputs = document.querySelectorAll('.controls input')
+    // console.log(inputs)
+    
+    function handleUpdata() {
+      console.log(this.value)
+      // console.log(this.dataset)
+      // dataset 獲得dom元素的data值
+      const px = this.dataset.sizing || ''
+      console.log(this.name)
+      // 修改root的CSS
+      document.documentElement.style.setProperty(`--${this.name}`, this.value + px)
+    }
+    // 替所有input加上change listener然後丟到handleUpdata
+    inputs.forEach(input => input.addEventListener('change', handleUpdata))
   </script>
 
 </body>
