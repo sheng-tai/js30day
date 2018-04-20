@@ -17,6 +17,51 @@
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
+const cities = []
+
+fetch(endpoint, {method: 'get'})
+  .then((res) => {
+    return res.json()
+  })
+  .then((d) => {
+    cities.push(...d)
+  })
+
+function matchWords(words, cities) {
+  const regex = new RegExp(words, 'gi')
+  return cities.filter((d) => {
+    return d.city.match(regex) || d.state.match(regex)
+  })
+}
+
+function display() {
+  const match = matchWords(this.value, cities)
+  let html =''
+  const regex = new RegExp(this.value, 'gi')
+  match.forEach((d) => {
+    const cityName = d.city.replace(regex, `<span class="hl">${this.value}</span>`);
+    const stateName = d.city.replace(regex, `<span class="hl">${this.value}</span>`);
+  // const cityName = d.city.replace(regex, `<span class="hl">${this.value}</span>`);
+  //   const stateName = d.state.replace(regex, `<span class="hl">${this.value}</span>`);
+    html += 
+    `<li>
+      <span class="name">${cityName}, ${stateName}</span>
+      <span class="population">${d.population}</span>
+    </li>`
+  })
+  suggestion.innerHTML = html
+}
+
+
+const searchInput = document.querySelector('.search')
+const suggestion = document.querySelector('.suggestions')
+
+searchInput.addEventListener('change', display)
+searchInput.addEventListener('keyup', display)
+
+
+
+
 </script>
   </body>
 </html>
