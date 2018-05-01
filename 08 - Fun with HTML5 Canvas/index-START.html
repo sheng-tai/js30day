@@ -7,6 +7,65 @@
 <body>
 <canvas id="draw" width="800" height="800"></canvas>
 <script>
+
+  // 抓取canvas
+  const canvas = document.querySelector('#draw')
+  // 設定寬高等於螢幕
+  canvas.width = innerWidth
+  canvas.height = innerHeight
+  // 是否正在按壓滑鼠
+  let isDrawig = false
+  let lastX = 0
+  let lastY = 0
+  let direction =  true
+
+  const ctx = canvas.getContext('2d')
+  ctx.lineCap = 'round'
+  ctx.lineJoin = 'round'
+  ctx.lineWidth = 100
+  ctx.strokeStyle = '#f00'
+  // ctx.fillStyle = '#f00'
+
+  let hue = 0
+
+  function draw(e) {
+    if(!isDrawig) return
+    console.log(e)
+    // 設定顏色
+    ctx.strokeStyle = `hsl(${hue}, 90%, 50%)`
+
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY)
+    ctx.lineTo(e.offsetX, e.offsetY)
+    ctx.stroke()
+
+    lastX = e.offsetX
+    lastY = e.offsetY
+
+    if (hue === 360) hue = 0
+    hue ++
+
+    if(ctx.lineWidth >= 100 || ctx.lineWidth <= 10) direction = !direction
+
+    if(direction) {
+      ctx.lineWidth++
+    }else {
+      ctx.lineWidth--
+    }
+
+  }
+
+  canvas.addEventListener('mousedown', (e) => {
+    isDrawig = true
+    
+    lastX = e.offsetX
+    lastY = e.offsetY
+  })
+
+  canvas.addEventListener('mousemove', draw)
+  
+  canvas.addEventListener('mouseup', () => { isDrawig = false })
+ canvas.addEventListener('mouseout', () => { isDrawig = false })
 </script>
 
 <style>

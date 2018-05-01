@@ -18,7 +18,10 @@
     }
 
     // Regular
-
+    console.log('%s', 'hello')
+    console.log('%d', 123)
+    console.log('%c Hello world', 'color: red; font-size: 30px')
+    console.log('%o', {text: 'hi there'})
     // Interpolated
 
     // Styled
@@ -26,20 +29,39 @@
     // warning!
 
     // Error :|
-
+    console.error('this is error')
     // Info
-
+    console.info('info')
     // Testing
-
+    console.assert(1!= 1, '1 == 1')
     // clearing
 
     // Viewing DOM Elements
-
+    const p = document.querySelector('p')
+    console.log(p)
+    console.dir(p)
     // Grouping together
-
+    console.group('ddd')
+    console.log('asd')
+    console.groupEnd()
+    console.groupCollapsed('abc')
+    console.log('aaa')
+    console.groupEnd()
     // counting
-
+    console.count('a')
+    console.count('a')
+    console.count('a')
+    console.count('a')
+    console.count('a')
+    console.count('a')
     // timing
+    console.time('fetch')
+    fetch('https://api.github.com/users/soyaine')
+      .then(data => data.json())
+      .then(data => {
+        console.log(data)
+        console.timeEnd('fetch')
+      })
 
   </script>
 </body>

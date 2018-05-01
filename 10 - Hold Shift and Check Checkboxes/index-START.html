@@ -99,6 +99,61 @@
   </div>
 
 <script>
-</script>
+  // 嘗試解法1
+  // const checks = Array.from(document.querySelectorAll('[type="checkbox"]'))
+  // let check_list = []
+  // let check_index = []
+
+  // checks.forEach((check, index) => {
+  //   check_list.push(check.checked)
+
+  //   check.addEventListener('click', e => {
+  //     check_list[index] = check.checked
+      
+  //     check_index.push(index)
+  //     console.log(check_index)
+
+  //     if(check_index.length > 2) {
+  //       check_index.shift()
+  //     }
+      
+  //     // console.log(index)
+  //     console.log(check_list)
+  //     if(e.shiftKey) {
+  //       const last = check_index.pop()
+  //       const start = check_index.pop()
+       
+  //      console.log(last)
+  //      console.log(start)
+  //      if(start < last) {
+  //        for (let i = start + 1; i < last; i++) {
+  //          check_list[i] = !check_list[i]
+  //          checks[i].checked = check_list[i]
+  //        }
+  //      }
+       
+  //      if (start > last) {
+  //         for(let i = start; i > last; i--) {
+  //           check_list[i] = !check_list[i]
+  //           checks[i].checked = check_list[i]
+  //         }
+  //       }
+       
+  //     }
+  //   })
+  // })
+
+  // 嘗試解法2
+  const checkboxes = document.querySelectorAll('[type="checkbox"]')
+
+  function handleCheck(e) {
+    
+  }
+
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('click', handleCheck)
+  })
+
+  </script>
 </body>
 </html>
