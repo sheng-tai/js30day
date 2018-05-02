@@ -145,9 +145,31 @@
 
   // 嘗試解法2
   const checkboxes = document.querySelectorAll('[type="checkbox"]')
+  let start
+  let end
+  let inBetween = false
 
   function handleCheck(e) {
-    
+    // console.log(this)
+    // 如果按下shift而且是被選起來的話
+    if(e.shiftKey && this.checked) {
+      end = this
+      checkboxes.forEach(checkbox => {
+        console.log(checkbox)
+        // 判斷checkbox已經到 start或 end
+        if(checkbox === start || checkbox === end) {
+          inBetween = !inBetween
+          console.log('-------------------')
+        }
+        // 若在start或end之間 那checkbox都被圈起來
+        if(inBetween) {
+          checkbox.checked = true
+        }
+      })
+      // 若是已經進入if則回傳空 start不會重新被賦值
+      return
+    }
+    start = this
   }
 
   checkboxes.forEach(checkbox => {
