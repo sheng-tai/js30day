@@ -58,6 +58,32 @@
       };
     }
 
+
+    const slidImages = document.querySelectorAll('.slide-in')
+    
+
+    function checkSlide(e) {
+      slidImages.forEach(slideImage => { 
+        // 滑動到距離圖片的一半
+        const slideAt = window.scrollY + window.innerHeight - slideImage.height / 2
+        // 圖片底部到最上方的距離
+        const imageBottom = slideImage.height + slideImage.offsetTop
+        // console.log('slide', slideAt)
+        // console.log('imgbottom',imageBottom)
+        // 如果已經滑動到圖片的一半就是true
+        const isHalfShown = slideAt > slideImage.offsetTop
+        
+        const isScrollPast = imageBottom > window.scrollY
+
+        if (isHalfShown && isScrollPast) {
+          slideImage.classList.add('active')
+        } else {
+          slideImage.classList.remove('active')
+        }
+      })
+    }
+
+    window.addEventListener('scroll', debounce(checkSlide))
   </script>
 
   <style>
