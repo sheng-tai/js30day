@@ -8,16 +8,38 @@
 
   <script>
     // start with strings, numbers and booleans
+    let name = 'Jack';
+    let name2 = name;
+    console.log(name, name2);
+
+    name2 = 'Tom';
+    console.log(name, name2);
+
+    let age = 20;
+    let age2 = age;
+
+    console.log(age, age2);
+    age2 = 30;
+    console.log(age, age2);
+
+    let a = true;
+    let b = a;
+    console.log(a, b);
+
+    b = false;
+    console.log(a, b);
 
     // Let's say we have an array
     const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
 
     // and we want to make a copy of it.
-
+    // const players2 = players;
+    // console.log(players, players2);
     // You might think we can just do something like this:
 
     // however what happens when we update that array?
-
+    // players2[3] = 'Hey';
+    // console.log(players, players2);
     // now here is the problem!
 
     // oh no - we have edited the original array too!
@@ -27,11 +49,18 @@
     // So, how do we fix this? We take a copy instead!
 
     // one way
-
+    let players2 = Array.from(players);
+    players2[3] = 'Players2'
+    console.log(players, players2)
     // or create a new array and concat the old one in
-
+    // 使用空陣列連結players陣列
+    let players3 = [].concat(players);
+    players3[3] = 'Players3';
+    console.log(players, players3);
     // or use the new ES6 Spread
-
+    let players4 = [... players];
+    players4[3] = 'Players4';
+    console.log(players, players4);
     // now when we update it, the original one isn't changed
 
     // The same thing goes for objects, let's say we have a person object
@@ -43,12 +72,25 @@
     };
 
     // and think we make a copy:
-
+    // const person2 = person;
+    // person2.age = 20;
+    // console.log(person, person2);
     // how do we take a copy instead?
-
+    // 使用assign 第一個三數是初始值 二、三是合併值 如果第3個三數的值會覆蓋到第2個的
+    const person2 = Object.assign({}, person, {
+      name: 'person2',
+      age: 80
+    });
+    console.log(person, person2);
     // We will hopefully soon see the object ...spread
-
+    const person3 = {... person};
+    person3.name = 'person3';
+    console.log(person, person3);
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+    // 這會做更深入的拷貝，如果陣列有更多層會全部都拷貝而不是參照位置，視情況使用。
+    const person4 = JSON.parse(JSON.stringify(person));
+    person4.name = 'perosn4';
+    console.log(person, person4);
 
   </script>
 
